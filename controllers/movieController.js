@@ -25,19 +25,30 @@ const MovieController = {
             })
     },
 
-    getByName(req, res) {
+    getByTitle(req, res) {
         movie.findAll({
                 where: {
-                    name: {
-                        [Op.like]: `%${req.params.name}%`
+                    title: {
+                        [Op.like]: `%${req.params.title}%`
                     }
                 }
             })
-            .then(category => res.send(category))
+            .then(movie => res.send(movie))
             .catch(error => {
                 console.error(error);
                 res.status(500).send({
-                    message: 'There was a problem trying to get the category'
+                    message: 'There was a problem trying to get the movie'
+                })
+            })
+    },
+
+    create(req, res) {
+        movie.create(req.body)
+            .then(movie => res.send(movie))
+            .catch(error => {
+                console.error(error);
+                res.status(500).send({
+                    message: 'There was a problem trying to create the movie'
                 })
             })
     }

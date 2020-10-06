@@ -10,10 +10,11 @@ router.post('/login', UserController.login);
 /*
 //Endpoint de perfil de usuario
 router.get('/:id', UserController.getById);
+*/
 
 //Endpoint de baja de usuario
-router.delete('/:id', UserController.deleteById);
-*/
+router.delete('/deleteUser', UserController.delete);
+
 
 
 module.exports = router;

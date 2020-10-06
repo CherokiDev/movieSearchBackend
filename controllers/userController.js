@@ -44,6 +44,29 @@ const UserController = {
             res.status(500).send({ message: 'There was a problem trying to login' })
         }
 
+    },
+    delete(req, res) {
+        User.destroy({
+                where: {
+                    email: req.body.email
+                }
+            })
+            .then((email) => {
+                if (!email) {
+                    return res.send({
+                        message: 'Email not found'
+                    })
+                }
+                res.send({
+                    message: 'Account successfully removed'
+                })
+            })
+            .catch(error => {
+                console.error(error);
+                res.status(500).send({
+                    message: 'There was a problem trying to remove the account'
+                })
+            })
     }
 }
 

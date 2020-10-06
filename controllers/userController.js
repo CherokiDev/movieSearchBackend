@@ -15,6 +15,35 @@ const UserController = {
                 message: 'There was a problem trying to register the user'
             })
         }
+    },
+    async login(req, res) {
+        try {
+            const user = await User.findOne({
+                where: {
+                    email: req.body.email
+                }
+            })
+            if (!user) {
+                return res.status(400).send({
+                    message: 'Wrong credentials'
+                })
+            }
+            const isMatch = await bcrypt.compare(req.body.password, user.password)
+            if (!isMatch) {
+                return res.status(400).send({
+                    message: 'Wrong credentials'
+                })
+            }
+            const token = jwt.sign({ id: user.id }, 'supercalifragilisticoespialidoso', { expiresIn: '30d' });
+            console.log(token)
+            user.token = token; 
+            await user.save()
+            res.send(user);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ message: 'There was a problem trying to login' })
+        }
+
     }
 }
 

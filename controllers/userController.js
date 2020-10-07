@@ -1,7 +1,6 @@
-const { User, Sequelize } = require('../models');
+const { User } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Op = Sequelize.Op;
 
 const UserController = {
     async signup(req, res) {
@@ -12,7 +11,7 @@ const UserController = {
         } catch (error) {
             console.error(error);
             res.status(500).send({
-                error, 
+                error,
                 message: 'There was a problem trying to register the user'
             })
         }
@@ -35,33 +34,39 @@ const UserController = {
                     message: 'Wrong credentials'
                 })
             }
-            const token = jwt.sign({ id: user.id }, 'supercalifragilisticoespialidoso', { expiresIn: '30d' });
+            const token = jwt.sign({
+                id: user.id
+            }, 'supercalifragilisticoespialidoso', {
+                expiresIn: '30d'
+            });
             console.log(token)
-            user.token = token; 
+            user.token = token;
             await user.save()
             res.send(user);
         } catch (error) {
             console.error(error);
-            res.status(500).send({ message: 'There was a problem trying to login' })
+            res.status(500).send({
+                message: 'There was a problem trying to login'
+            })
         }
 
-    },/*
-    getByEmail(res, req) {
+    },
+    getByEmail(req, res) {
         User.findAll({
-            where: {
-                email: {
-                    [Op.like]: `%${req.paramas.email}%`
+                where: {
+                    email: req.params.email
+                }, attributes: {
+                    exclude: ['token', 'id']
                 }
-            }
-        })
-        .then(user => res.send(user))
-        .catch(error => {
-            console.error(error);
-            res.status(500).send({
-                message: 'There was a problem trying to get the user'
             })
-        })
-    },*/
+            .then(user => res.send(user))
+            .catch(error => {
+                console.error(error);
+                res.status(500).send({
+                    message: 'There was a problem trying to get the user'
+                })
+            })
+    },
 
     delete(req, res) {
         User.destroy({

@@ -9,7 +9,7 @@ router.post('/login', UserController.login);
 
 
 //Ruta de perfil de usuario
-/*router.get('/profile/:email', UserController.getByEmail);*/
+router.get('/profile/:email', UserController.getByEmail);
 
 
 //Ruta de baja de usuario

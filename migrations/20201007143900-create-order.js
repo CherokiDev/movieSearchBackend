@@ -14,7 +14,7 @@ module.exports = {
       returnDate: {
         type: Sequelize.DATE
       },
-      OrderId: {
+      UserId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

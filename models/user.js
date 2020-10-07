@@ -4,13 +4,8 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      this.hasMany(models.Order);
     }
   };
   User.init({
@@ -30,9 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
   User.prototype.toJSON = function () { //override/sobreescritura del método
-    const values = this.get();
-    delete values.password;
-    return values;
+    const user = this.get();
+    delete user.password;
+    return user;
   }
   return User;
 };

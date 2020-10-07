@@ -1,6 +1,7 @@
-const { User } = require('../models');
+const { User, Sequelize } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Op = Sequelize.Op;
 
 const UserController = {
     async signup(req, res) {
@@ -44,7 +45,24 @@ const UserController = {
             res.status(500).send({ message: 'There was a problem trying to login' })
         }
 
-    },
+    },/*
+    getByEmail(res, req) {
+        User.findAll({
+            where: {
+                email: {
+                    [Op.like]: `%${req.paramas.email}%`
+                }
+            }
+        })
+        .then(user => res.send(user))
+        .catch(error => {
+            console.error(error);
+            res.status(500).send({
+                message: 'There was a problem trying to get the user'
+            })
+        })
+    },*/
+
     delete(req, res) {
         User.destroy({
                 where: {

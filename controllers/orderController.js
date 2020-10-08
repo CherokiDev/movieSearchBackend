@@ -45,11 +45,12 @@ const OrderController = {
         } catch (error) {
             console.error(error);
             res.status(500).send({
-                message: 'There was a problema trying to create the order'
+                message: 'There was a problem trying to create the order'
             })
         }
     }
 
+    //Crear pedido en promesas
     /*create(req, res) {
         const returnDate = new Date();
         returnDate.setDate(returnDate.getDate() + 2)

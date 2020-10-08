@@ -6,7 +6,9 @@ const auth = require('./middleware/auth');
 
 
 const app = express();
+
 const PORT = 3000;
+
 app.use(express.json());
 
 app.get('/', auth, (req, res) => res.send(req.user))

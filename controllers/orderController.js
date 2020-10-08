@@ -27,7 +27,30 @@ const OrderController = {
             })
         }
     }, 
-    create(req, res) {
+    async create (req, res) {
+        try {
+            const returnDate = new Date();
+            returnDate.setDate(returnDate.getDate() + 2)
+            const order = await Order.create({
+                status: 'Rented',
+                returnDate,
+                UserId: req.user.id
+            });
+                const movie = await order.addMovie(req.body.movies)
+                
+                res.send({
+                    message: 'Order successfully completed'
+                })
+            
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({
+                message: 'There was a problema trying to create the order'
+            })
+        }
+    }
+
+    /*create(req, res) {
         const returnDate = new Date();
         returnDate.setDate(returnDate.getDate() + 2)
         Order.create({
@@ -47,7 +70,7 @@ const OrderController = {
                 message: 'There was a problema trying to create the order'
             })
         })
-    }
+    }*/
 }
 
 module.exports = OrderController;

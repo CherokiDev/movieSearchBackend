@@ -1,4 +1,6 @@
-const { User } = require('../models');
+const {
+    User
+} = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -51,6 +53,32 @@ const UserController = {
         }
 
     },
+
+    async getByEmail(req, res) {
+        try {
+            const email = await User.findOne({
+                where: {
+                    email: req.params.email
+                },
+                attributes: {
+                    exclude: ['token', 'id']
+                }
+            })
+            if (!email) {
+                return res.status(400).send({
+                    message: 'Email not found'
+                })
+            }
+            res.send(email);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({
+                message: 'There was a problem trying to get the user'
+            })
+        }
+    },
+
+    /*
     getByEmail(req, res) {
         User.findAll({
                 where: {
@@ -66,8 +94,32 @@ const UserController = {
                     message: 'There was a problem trying to get the user'
                 })
             })
-    },
+    },*/
 
+    async delete(req, res) {
+        try {
+            const email = await User.destroy({
+                where: {
+                    email: req.body.email
+                }
+            })
+            if (!email) {
+                return res.status(400).send({
+                    message: 'Email not found'
+                })
+            }
+            res.send({
+                message: 'Account successfully removed'
+            })
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({
+                message: 'There was a problem trying to remove the account'
+            })
+        }
+    }
+
+    /*
     delete(req, res) {
         User.destroy({
                 where: {
@@ -90,7 +142,7 @@ const UserController = {
                     message: 'There was a problem trying to remove the account'
                 })
             })
-    }
+    }*/
 }
 
 

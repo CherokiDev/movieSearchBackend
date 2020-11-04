@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "movieSearch",
+    "database": "moviesearch",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

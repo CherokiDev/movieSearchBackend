@@ -12,27 +12,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      description: {
-        type: Sequelize.STRING
-      },
-      year: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      genre: {
+      poster_path: {
         type: Sequelize.STRING,
-        allowNull: false
       },
-      image: {
-        type: Sequelize.STRING
+      overview: {
+        type: Sequelize.STRING,
+      },
+      release_date: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       }
     });
   },

@@ -13,16 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    description: DataTypes.STRING,
-    year: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+    poster_path: {
+      type: DataTypes.STRING
     },
-    genre: {
-      type: DataTypes.STRING,
-      allowNull: false
+    overview: {
+      type: DataTypes.STRING
     },
-    image: DataTypes.STRING
+    release_date: {
+      type: DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'movie',

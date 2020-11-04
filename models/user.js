@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
-    name: DataTypes.STRING,
+    firstname: DataTypes.STRING,
+    surname: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -19,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    phone: DataTypes.STRING,
+    birthdate: DataTypes.DATE,
+    credit_card: DataTypes.STRING,
+    role: DataTypes.INTEGER,
     token: DataTypes.STRING
   }, {
     sequelize,

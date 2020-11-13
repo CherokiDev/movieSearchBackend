@@ -5,6 +5,7 @@ const {
 
 const auth = async(req, res, next) => {
     try {
+        console.log(req.headers)
         const token = req.headers.authorization.split(' ')[1];
         jwt.verify(token, 'supercalifragilisticoespialidoso');
         const user = await User.findOne({ where: { token: token } });
@@ -14,7 +15,7 @@ const auth = async(req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
-        console.error(error)
+        console.error(error.message)
         res.status(401).send({ error, message: 'You are not authorized' })
     }
 }

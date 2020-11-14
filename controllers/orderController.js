@@ -48,6 +48,21 @@ const OrderController = {
                 message: 'There was a problem+ trying to create the order'
             })
         }
+    },
+
+    async getUserOrders(req, res) {
+        try{
+            const userOrders = await Order.findAll({
+                where: {
+                    UserId: req.params.UserId
+                }
+            });
+            res.send(userOrders);
+        } catch(error) {
+            res.status(500).send({
+                message: 'error al traer los pedidos'
+            })
+        }
     }
 
     //Crear pedido en promesas

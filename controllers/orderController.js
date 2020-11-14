@@ -15,7 +15,7 @@ const OrderController = {
                     }
                 }, {
                     model: User,
-                    attributes: ['name', 'email']
+                    attributes: ['firstname', 'email']
                 }]
             });
             res.send(orders);

@@ -31,6 +31,7 @@ const OrderController = {
         try {
             const returnDate = new Date();
             returnDate.setDate(returnDate.getDate() + 2)
+            
             const order = await Order.create({
                 status: 'Rented',
                 returnDate,
@@ -55,7 +56,14 @@ const OrderController = {
             const userOrders = await Order.findAll({
                 where: {
                     UserId: req.params.UserId
-                }
+                },
+                include: [{
+                    model: movie,
+                    attributes: ['title', 'poster_path'],
+                    through: {
+                        attributes: []
+                    }
+                }]
             });
             res.send(userOrders);
         } catch(error) {

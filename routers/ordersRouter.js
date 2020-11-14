@@ -9,7 +9,7 @@ router.get('/all', auth, OrderController.getAll);
 router.post('/', auth, OrderController.create);
 
 //Ruta para mostrar todos los pedidos de un usuario
-router.get('/:UserId', auth, OrderController.getUserOrders)
+router.get('/:UserId', OrderController.getUserOrders);
 
 
 module.exports = router;

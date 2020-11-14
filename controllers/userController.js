@@ -54,6 +54,28 @@ const UserController = {
 
     },
 
+    async logout(req, res) {
+        try {
+            const updateValues = {
+                token: ""
+            };
+            const user = await User.update(updateValues, 
+                {
+                    where: {
+                        email: req.params.email
+                    }
+                });
+            res.send({
+                message: `Goodbye ${user.firstname}`
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({
+                error, message: 'Hubo un problema'
+            })
+        }
+    },
+
     async getByEmail(req, res) {
         try {
             const email = await User.findOne({

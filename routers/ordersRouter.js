@@ -4,7 +4,7 @@ const OrderController = require('../controllers/orderController')
 const auth = require('../middleware/auth.js');
 
 //Ruta para mostrar todos los pedidos
-router.get('/all', auth, OrderController.getAll);
+router.get('/all', OrderController.getAll);
 //Ruta para crear un pedido
 router.post('/', auth, OrderController.create);
 

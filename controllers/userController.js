@@ -14,7 +14,7 @@ const UserController = {
             console.error(error);
             res.status(500).send({
                 error,
-                message: 'There was a problem trying to register the user'
+                message: 'Hubo un error al intentar registrar al usuario'
             })
         }
     },
@@ -27,13 +27,13 @@ const UserController = {
             })
             if (!user) {
                 return res.status(400).send({
-                    message: 'Wrong credentials'
+                    message: 'Error al introducir los datos'
                 })
             }
             const isMatch = await bcrypt.compare(req.body.password, user.password)
             if (!isMatch) {
                 return res.status(400).send({
-                    message: 'Wrong credentials'
+                    message: 'Error al introducir los datos'
                 })
             }
             const token = jwt.sign({
